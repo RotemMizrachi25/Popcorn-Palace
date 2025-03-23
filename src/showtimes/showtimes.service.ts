@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Between, LessThanOrEqual, MoreThanOrEqual, Not } from 'typeorm';
+import { Repository, LessThanOrEqual, MoreThanOrEqual, Not } from 'typeorm';
 import { Showtime } from './entities/showtime.entity';
 import { CreateShowtimeDto } from './dto/create-showtime.dto';
 import { MoviesService } from '../movies/movies.service';

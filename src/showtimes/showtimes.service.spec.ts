@@ -3,7 +3,7 @@ import { ShowtimesService } from './showtimes.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Showtime } from './entities/showtime.entity';
 import { MoviesService } from '../movies/movies.service';
-import { Repository, Not, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
+import { Repository } from 'typeorm';
 import { NotFoundException, BadRequestException } from '@nestjs/common';
 import { CreateShowtimeDto } from './dto/create-showtime.dto';
 
@@ -212,12 +212,11 @@ describe('ShowtimesService', () => {
         movieId: 1,
         price: 20.2,
         theater: 'Theater 1',
-        startTime: '2025-02-14', // Invalid format
+        startTime: '2025-02-14', 
         endTime: '2025-02-14T14:47:46.125Z',
-      } as any; // Use 'as any' to bypass TypeScript checks
+      } as any; 
       
-      // We expect some kind of error, but we don't care specifically about BadRequestException
-      // because date validation happens at the DTO/controller level
+  
       await expect(service.create(invalidShowtimeDto)).rejects.toThrow();
     });
   });
