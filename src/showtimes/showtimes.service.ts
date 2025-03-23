@@ -72,7 +72,6 @@ export class ShowtimesService {
         theater: savedShowtime.theater,
         startTime: savedShowtime.startTime,
         endTime: savedShowtime.endTime,
-        movie: savedShowtime.movie
     };
   }
 

@@ -21,7 +21,4 @@ export class Showtime {
   @Column()
   movieId: number;
 
-  @ManyToOne(() => Movie, movie => movie.id)
-  @JoinColumn({ name: 'movieId' })
-  movie: Movie;
 }
