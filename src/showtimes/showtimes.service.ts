@@ -13,15 +13,19 @@ export class ShowtimesService {
     private moviesService: MoviesService,
   ) {}
 
-  async findById(id: number): Promise<Showtime> {
-    const showtime = await this.showtimesRepository.findOne({
-      where: { id },
-      relations: ['movie'],
-    });
+  async findById(id: number): Promise<any> {
+    const showtime = await this.showtimesRepository.findOne({ where: { id } });
     if (!showtime) {
       throw new NotFoundException(`Showtime with ID ${id} not found`);
     }
-    return showtime;
+    return {
+      id: showtime.id,
+      price: showtime.price,
+      movieId: showtime.movieId,
+      theater: showtime.theater,
+      startTime: showtime.startTime,
+      endTime: showtime.endTime
+    };
   }
 
   async create(createShowtimeDto: CreateShowtimeDto): Promise<Showtime> {
@@ -58,7 +62,18 @@ export class ShowtimesService {
       endTime,
     });
 
-    return this.showtimesRepository.save(showtime);
+    const savedShowtime = await this.showtimesRepository.save(showtime);
+  
+    // Return with properties in the desired order
+    return {
+        id: savedShowtime.id,
+        price: savedShowtime.price,
+        movieId: savedShowtime.movieId,
+        theater: savedShowtime.theater,
+        startTime: savedShowtime.startTime,
+        endTime: savedShowtime.endTime,
+        movie: savedShowtime.movie
+    };
   }
 
   async update(id: number, updateShowtimeDto: CreateShowtimeDto): Promise<void> {
